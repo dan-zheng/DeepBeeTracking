@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
   name: "DeepBeeTracking",
+  platforms: [
+    .macOS(.v10_13),
+  ],
   products: [
     .executable(name: "TrainUNet", targets: ["TrainUNet"]),
     .library(name: "DeepBeeTrackingDatasets", targets: ["DeepBeeTrackingDatasets"]),
@@ -24,15 +27,13 @@ let package = Package(
       dependencies: [
         .product(name: "Checkpoints", package: "swift-models"),
       ]),
-    //.target(
-    //  name: "DeepBeeTracking",
-    //  dependencies: []),
     .target(
       name: "TrainUNet",
       dependencies: [
         "DeepBeeTrackingDatasets",
         "DeepBeeTrackingModels",
         .product(name: "ModelSupport", package: "swift-models"),
+        .product(name: "TrainingLoop", package: "swift-models"),
       ]),
   ]
 )

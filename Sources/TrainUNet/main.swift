@@ -3,6 +3,7 @@ import DeepBeeTrackingDatasets
 import DeepBeeTrackingModels
 import Foundation
 import ModelSupport
+import TrainingLoop
 import TensorFlow
 
 /// Given the segmentation of a single frame, return a batch of segmentations of tiles.
@@ -28,6 +29,9 @@ func tiles(_ frame: BeeFrameSegmentations.Segmentation) -> BeeFrameSegmentations
 let segmentations = BeeFrameSegmentations()
 var model = UNet()
 var opt = Adam(for: model, learningRate: 1e-4)
+
+// TODO: Replace raw training loop with `TrainingLoop`.
+// Reference: https://github.com/tensorflow/swift-models/blob/715e1a4827ec7fdf61642e1922006b6a8324f886/Examples/MobileNetV1-Imagenette/main.swift
 
 for epoch in 0..<30 {
   print("Running epoch \(epoch)")
